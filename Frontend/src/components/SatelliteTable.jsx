@@ -59,60 +59,62 @@ export default function SatelliteTable({ satellites }) {
         </div>
       </div>
 
-      <table className="data-table">
-        <thead>
-          <tr>
-            {COLS.map(col => (
-              <th key={col.key} onClick={() => handleSort(col.key)}>
-                {col.label}{sortIndicator(col.key)}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {filtered.map(sat => (
-            <tr key={sat.id}>
-              <td style={{ fontWeight: 500 }}>{sat.name}</td>
-              <td>
-                <div className="status-cell">
-                  <RuxStatus status={statusToRux(sat.status)} />
-                  {sat.status}
-                </div>
-              </td>
-              <td>
-                <span style={{
-                  padding: '2px 7px', borderRadius: 2, fontSize: 11, fontWeight: 500,
-                  background: 'rgba(77,172,255,0.12)', color: '#4dacff',
-                  border: '1px solid rgba(77,172,255,0.3)',
-                }}>
-                  {sat.orbit}
-                </span>
-              </td>
-              <td className="mono">{sat.altitude.toLocaleString()}</td>
-              <td>
-                <div className="status-cell">
-                  <RuxStatus status={signalToRux(sat.signal)} />
-                  {sat.signal}
-                </div>
-              </td>
-              <td>
-                <div className="battery-wrap">
-                  <div className="battery-track">
-                    <div className="battery-fill" style={{
-                      width: `${sat.batteryLevel}%`,
-                      background: batteryColor(sat.batteryLevel),
-                    }} />
-                  </div>
-                  <span className="battery-pct">{sat.batteryLevel}%</span>
-                </div>
-              </td>
-              <td className="c-muted" style={{ fontSize: 12 }}>
-                {relativeTime(sat.lastContact)}
-              </td>
+      <div style={{ overflowX: 'auto' }}>
+        <table className="data-table">
+          <thead>
+            <tr>
+              {COLS.map(col => (
+                <th key={col.key} onClick={() => handleSort(col.key)}>
+                  {col.label}{sortIndicator(col.key)}
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filtered.map(sat => (
+              <tr key={sat.id}>
+                <td style={{ fontWeight: 500 }}>{sat.name}</td>
+                <td>
+                  <div className="status-cell">
+                    <RuxStatus status={statusToRux(sat.status)} />
+                    {sat.status}
+                  </div>
+                </td>
+                <td>
+                  <span style={{
+                    padding: '2px 7px', borderRadius: 2, fontSize: 11, fontWeight: 500,
+                    background: 'rgba(77,172,255,0.12)', color: '#4dacff',
+                    border: '1px solid rgba(77,172,255,0.3)',
+                  }}>
+                    {sat.orbit}
+                  </span>
+                </td>
+                <td className="mono">{sat.altitude.toLocaleString()}</td>
+                <td>
+                  <div className="status-cell">
+                    <RuxStatus status={signalToRux(sat.signal)} />
+                    {sat.signal}
+                  </div>
+                </td>
+                <td>
+                  <div className="battery-wrap">
+                    <div className="battery-track">
+                      <div className="battery-fill" style={{
+                        width: `${sat.batteryLevel}%`,
+                        background: batteryColor(sat.batteryLevel),
+                      }} />
+                    </div>
+                    <span className="battery-pct">{sat.batteryLevel}%</span>
+                  </div>
+                </td>
+                <td className="c-muted" style={{ fontSize: 12 }}>
+                  {relativeTime(sat.lastContact)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {filtered.length === 0 && (
         <div style={{ padding: 32, textAlign: 'center', color: 'var(--color-text-secondary)' }}>
