@@ -81,9 +81,6 @@ coverage*/
 *.user
 *.suo
 
-# GitHub Actions
-.github/
-
 # Secret files
 secrets.json
 
