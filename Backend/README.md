@@ -1,100 +1,56 @@
-# Space Operations Dashboard
-**ASP.NET Core 8 backend + React + Astro UXDS frontend**
+# Backend - Space Operations Dashboard
 
-A space-domain operations dashboard built with:
-- **Backend:** ASP.NET Core 8 Minimal API (C#) serving satellite, alert, and contact-window data
-- **Frontend:** React 18 (via CDN) with Astro UXDS web components — no build step required
+This folder contains the ASP.NET Core 8 backend for the Space Operations Dashboard. It exposes a minimal API with three controllers that return in‑memory data. The frontend (under `../Frontend`) consumes the same endpoints.
 
----
-
-## Project Structure
+## What’s here
 
 ```
-SpaceDashboard/
-├── Backend/
-│   ├── SpaceDashboard.Api.csproj
-│   ├── Program.cs
-│   ├── Models/
-│   │   └── Models.cs
-│   └── Controllers/
-│       ├── SatellitesController.cs   → GET /api/satellites, GET /api/satellites/stats
-│       ├── AlertsController.cs       → GET /api/alerts, PATCH /api/alerts/{id}/acknowledge
-│       └── ContactsController.cs     → GET /api/contacts
-└── Frontend/
-    └── index.html                    ← entire frontend in one file
+Backend/
+├── SpaceDashboard.Api.csproj      # .NET project file targeting net8.0
+├── Program.cs                    # Minimal API startup
+├── Models/                       # Simple DTOs used by the controllers
+│   └── Models.cs
+└── Controllers/                  # HTTP endpoints
+    ├── SatellitesController.cs   → GET /api/satellites, GET /api/satellites/stats
+    ├── AlertsController.cs       → GET /api/alerts, PATCH /api/alerts/{id}/acknowledge
+    └── ContactsController.cs     → GET /api/contacts
 ```
 
----
+All data is defined in static lists within the controllers. You can replace those with a database or other service as needed.
 
-## Running the Backend
+## Prerequisites
+
+- [.NET 8 SDK](https://dotnet.microsoft.com/download) installed on your machine
+- (Optional) Visual Studio 2022/2023 or `dotnet` CLI for development
+
+## Running the backend
+
+Open a terminal at `Backend` and run:
 
 ```bash
-cd Backend
 dotnet run
-# API will be at http://localhost:5000
 ```
 
-Swagger UI available at: http://localhost:5000/swagger
+By default the app listens on `http://localhost:59607` and `https://localhost:59606`. Swagger/OpenAPI is available at `http://localhost:59607/swagger`.
 
-### API Endpoints
+### API endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET    | /api/satellites | All satellites + status |
-| GET    | /api/satellites/stats | Dashboard statistics |
-| GET    | /api/alerts | System alerts |
-| PATCH  | /api/alerts/{id}/acknowledge | Acknowledge an alert |
-| GET    | /api/contacts | Contact windows |
+| Method | Path                          | Description                         |
+|--------|-------------------------------|-------------------------------------|
+| GET    | `/api/satellites`            | All satellites with health/status   |
+| GET    | `/api/satellites/stats`      | Summary statistics for dashboard    |
+| GET    | `/api/alerts`                | Current system alerts               |
+| PATCH  | `/api/alerts/{id}/acknowledge` | Acknowledge an alert               |
+| GET    | `/api/contacts`              | Upcoming contact windows            |
 
----
+Use `curl` or a browser to hit these endpoints while the server is running.
 
-## Running the Frontend
+## Developing & Extending
 
-Simply open `Frontend/index.html` in a browser — no npm, no build step needed.
+- **Add data sources**: replace the in‑memory lists or wire up Entity Framework Core.
+- **Authentication**: plug in ASP.NET Identity, JWT bearer, or another scheme.
+- **Logging/Telemetry**: configure ESL or Application Insights in `Program.cs`.
 
-The frontend will:
-1. Attempt to connect to `http://localhost:5000/api` (the ASP.NET backend)
-2. If the backend is unavailable, automatically fall back to built-in mock data
-3. Show a yellow banner indicating demo/live mode
-
-### To serve with a local server (optional, avoids CORS on some browsers):
-```bash
-cd Frontend
-npx serve .
-# or
-python3 -m http.server 3000
-```
+The frontend is configured to call `http://localhost:59607/api` by default; adjust the base URL in `../Frontend/api/index.js` if you change the backend port.
 
 ---
-
-## Astro UXDS Components Used
-
-| Component | Usage |
-|-----------|-------|
-| `rux-global-status-bar` | Top application bar |
-| `rux-clock` | Live UTC clock |
-| `rux-classification-marking` | UNCLASSIFIED banner |
-| `rux-monitoring-icon` | Satellite health icons |
-| `rux-status` | Status dot indicators (off/standby/normal/caution/serious/critical) |
-| `rux-badge` | Alert count badge |
-| `rux-button` | Primary/secondary/tertiary/icon buttons |
-| `rux-push-button` | Toggle lock button |
-| `rux-input` | Text and number inputs |
-| `rux-select` + `rux-option` | Dropdowns |
-| `rux-checkbox` | Checkboxes |
-| `rux-switch` | Toggle switch |
-| `rux-slider` | Transmit power slider |
-| `rux-progress` | Signal processing progress bar |
-| `rux-tabs` + `rux-tab` + `rux-tab-panel` | Tabbed content |
-| `rux-textarea` | Multi-line input |
-| `rux-notification` | Toast notifications |
-| `rux-tag` | Orbit type labels |
-| `rux-icon` | Icon elements |
-
----
-
-## Extending the App
-
-- **Add more data:** Extend the `_satellites` list in `SatellitesController.cs` or hook up a real database via Entity Framework Core
-- **Add auth:** Integrate ASP.NET Identity or JWT bearer tokens
-- **Build step:** For production, swap the CDN React/Babel for a Vite or CRA build, and install `@astrouxds/react` from npm

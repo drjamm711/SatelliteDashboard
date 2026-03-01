@@ -1,73 +1,80 @@
-# Space Ops Dashboard — Vite + React Frontend
+# Frontend – Space Ops Dashboard (Vite + React)
 
-## Stack
-- **Vite 5** — dev server + build tool
-- **React 18** — UI framework  
-- **React Router 6** — client-side routing
-- **@astrouxds/react** — official React wrappers for Astro UXDS web components
+The frontend is a standard Vite-powered React application that communicates with the ASP.NET backend at `/api`. If the backend is not accessible, it automatically displays example data and shows a banner indicating **Demo Mode**.
 
-## Getting Started
+## Stack 
+- **Vite 5** – dev server, HMR, build tool
+- **React 18** – UI framework
+- **React Router 6** – client-side routing
+- **@astrouxds/react** – official React wrappers for Astro UXDS web components
+
+## Quick Start 
 
 ```bash
+cd Frontend
 npm install
 npm run dev        # → http://localhost:3000
 ```
 
-The Vite dev server automatically proxies `/api/*` → `http://localhost:5000` (the ASP.NET backend).  
-If the backend isn't running, the app falls back to built-in mock data automatically.
+While running the dev server, requests to `/api/*` are proxied to `http://localhost:5000` (see `vite.config.js`).
 
-## Project Structure
+The app uses `src/hooks/useSpaceData.js` to fetch satellites, alerts, contacts, and stats. If the HTTP requests fail (backend down), it keeps the built‑in `mockData` and sets `apiMode=false` which triggers the yellow demo banner.
+
+## Project Layout 
 
 ```
 src/
 ├── api/
-│   ├── index.js          ← All fetch calls in one place
-│   └── mockData.js       ← Fallback data when backend is offline
+│   ├── index.js          ← centralized fetch logic
+│   └── mockData.js       ← fallback data when backend is offline
 ├── hooks/
-│   ├── useSpaceData.js   ← Fetches satellites, alerts, contacts, stats
-│   └── useClock.js       ← Live UTC clock
-├── components/
-│   ├── GlobalStatusBar.jsx  ← Top bar (rux-global-status-bar)
-│   ├── Sidebar.jsx          ← Nav with React Router NavLink
-│   ├── StatCards.jsx        ← 4-up summary cards
-│   ├── SatelliteTable.jsx   ← Sortable/filterable data table
-│   ├── AlertsPanel.jsx      ← Alert list with acknowledge action
-│   ├── ContactsPanel.jsx    ← Ground contact windows
-│   └── ControlsDemo.jsx     ← Astro UXDS component showcase
-├── pages/
-│   ├── Dashboard.jsx     ← Composes all panels
-│   ├── Satellites.jsx    ← Full-page satellite table
-│   ├── Contacts.jsx      ← Full-page contact list
-│   ├── Alerts.jsx        ← Full-page alerts
-│   └── Settings.jsx      ← App settings form
-├── App.jsx               ← Router + layout shell
-├── main.jsx              ← Entry point, registers Astro UXDS
-├── index.css             ← Global styles + Astro UXDS token imports
-└── utils.js              ← relativeTime, batteryColor, status helpers
+│   ├── useSpaceData.js   ← data loader with API/demo mode logic
+│   └── useClock.js       ← live UTC clock
+├── components/           ← reusable UI pieces
+│   ├── GlobalStatusBar.jsx
+│   ├── Sidebar.jsx
+│   ├── StatCards.jsx
+│   ├── SatelliteTable.jsx
+│   ├── AlertsPanel.jsx
+│   ├── ContactsPanel.jsx
+│   └── ControlsDemo.jsx
+├── pages/                ← top‑level route components
+│   ├── Dashboard.jsx
+│   ├── Satellites.jsx
+│   ├── Contacts.jsx
+│   ├── Alerts.jsx
+│   └── Settings.jsx
+├── App.jsx               ← router & layout shell
+├── main.jsx              ← entry point, registers Astro UXDS tokens
+├── index.css             ← global styles + token imports
+└── utils.js              ← helpers (relativeTime, batteryColor, etc.)
 ```
 
-## Changing the API URL
+## Configuring the API Base URL
 
-Edit `vite.config.js`:
+The Vite proxy is set in `vite.config.js`:
 ```js
 proxy: {
   '/api': {
-    target: 'http://localhost:5000',  // ← change this
+    target: 'http://localhost:59607',  // change when backend moves
   }
 }
 ```
 
-## Build for Production
+For production builds you can instead configure `BASE_URL` at runtime or adjust the proxy to point to your deployed API; the code always prefixes fetches with `/api`.
+
+## Building for Production 
 
 ```bash
 npm run build     # outputs to dist/
 npm run preview   # preview the production build locally
 ```
 
-The `dist/` folder can be served as static files from ASP.NET's `wwwroot` or any CDN.
+Serve the contents of `dist/` as static files from `wwwroot` (ASP.NET) or any static file server.
 
-## Adding a New Page
+## Adding a New Page 
+1. Add a new component in `src/pages/MyPage.jsx`.
+2. Register the route inside `src/App.jsx`.
+3. Add a navigation link in `src/components/Sidebar.jsx`.
 
-1. Create `src/pages/MyPage.jsx`
-2. Add a route in `src/App.jsx`
-3. Add a nav entry in `src/components/Sidebar.jsx`
+---
