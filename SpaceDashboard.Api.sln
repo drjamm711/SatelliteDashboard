@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceDashboard.Api", "Backend\SpaceDashboard.Api.csproj", "{526A5E2C-5ADF-48A4-A782-41C203CD84CB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{CA961DA7-55F3-49AC-8987-E2B1CF58204B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{E1992D9C-1201-496E-B716-4670DC2689B3}"
+	ProjectSection(SolutionItems) = preProject
+		Frontend\index.html = Frontend\index.html
+		Frontend\package-lock.json = Frontend\package-lock.json
+		Frontend\package.json = Frontend\package.json
+		Frontend\README.md = Frontend\README.md
+		Frontend\vite.config.js = Frontend\vite.config.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{66D35F25-77D8-4884-A5C3-E787CDCF7A0D}"
+	ProjectSection(SolutionItems) = preProject
+		Frontend\src\App.jsx = Frontend\src\App.jsx
+		Frontend\src\index.css = Frontend\src\index.css
+		Frontend\src\main.jsx = Frontend\src\main.jsx
+		Frontend\src\utils.js = Frontend\src\utils.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{662F5777-5520-4AA3-8F05-7EBB9EBB0602}"
+	ProjectSection(SolutionItems) = preProject
+		Frontend\src\api\index.js = Frontend\src\api\index.js
+		Frontend\src\api\mockData.js = Frontend\src\api\mockData.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "components", "components", "{82B9716B-A247-4D67-99F8-101F7BE26077}"
+	ProjectSection(SolutionItems) = preProject
+		Frontend\src\components\AlertsPanel.jsx = Frontend\src\components\AlertsPanel.jsx
+		Frontend\src\components\ContactsPanel.jsx = Frontend\src\components\ContactsPanel.jsx
+		Frontend\src\components\ControlsDemo.jsx = Frontend\src\components\ControlsDemo.jsx
+		Frontend\src\components\GlobalStatusBar.jsx = Frontend\src\components\GlobalStatusBar.jsx
+		Frontend\src\components\SatelliteTable.jsx = Frontend\src\components\SatelliteTable.jsx
+		Frontend\src\components\Sidebar.jsx = Frontend\src\components\Sidebar.jsx
+		Frontend\src\components\StatCards.jsx = Frontend\src\components\StatCards.jsx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hooks", "hooks", "{460BF1F4-312B-4BD1-AF26-6307A34F532F}"
+	ProjectSection(SolutionItems) = preProject
+		Frontend\src\hooks\useClock.js = Frontend\src\hooks\useClock.js
+		Frontend\src\hooks\useSpaceData.js = Frontend\src\hooks\useSpaceData.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pages", "pages", "{8B635890-A0EA-4276-B4AF-B54E3F1A60A2}"
+	ProjectSection(SolutionItems) = preProject
+		Frontend\src\pages\Alerts.jsx = Frontend\src\pages\Alerts.jsx
+		Frontend\src\pages\Contacts.jsx = Frontend\src\pages\Contacts.jsx
+		Frontend\src\pages\Dashboard.jsx = Frontend\src\pages\Dashboard.jsx
+		Frontend\src\pages\Satellites.jsx = Frontend\src\pages\Satellites.jsx
+		Frontend\src\pages\Settings.jsx = Frontend\src\pages\Settings.jsx
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{526A5E2C-5ADF-48A4-A782-41C203CD84CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{526A5E2C-5ADF-48A4-A782-41C203CD84CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{526A5E2C-5ADF-48A4-A782-41C203CD84CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{526A5E2C-5ADF-48A4-A782-41C203CD84CB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{526A5E2C-5ADF-48A4-A782-41C203CD84CB} = {CA961DA7-55F3-49AC-8987-E2B1CF58204B}
+		{66D35F25-77D8-4884-A5C3-E787CDCF7A0D} = {E1992D9C-1201-496E-B716-4670DC2689B3}
+		{662F5777-5520-4AA3-8F05-7EBB9EBB0602} = {66D35F25-77D8-4884-A5C3-E787CDCF7A0D}
+		{82B9716B-A247-4D67-99F8-101F7BE26077} = {66D35F25-77D8-4884-A5C3-E787CDCF7A0D}
+		{460BF1F4-312B-4BD1-AF26-6307A34F532F} = {66D35F25-77D8-4884-A5C3-E787CDCF7A0D}
+		{8B635890-A0EA-4276-B4AF-B54E3F1A60A2} = {66D35F25-77D8-4884-A5C3-E787CDCF7A0D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E90297A-F40D-4AAE-8E2E-88AD0763A6B8}
+	EndGlobalSection
+EndGlobal
