@@ -8,8 +8,8 @@ export default function AlertsPanel({ alerts, acknowledgeAlert }) {
   return (
     <div className="panel">
       <div className="panel-header">
-        <span className="panel-title">Controls &amp; Component Showcase</span>
-        <RuxIcon icon="antenna-receive" size="extra-small" />
+        <span className="panel-title">Alerts</span>
+        <RuxIcon icon="warning" size="extra-small" />
       </div>
       <div>
         {[...unacked, ...acked].map(alert => (

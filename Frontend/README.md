@@ -56,7 +56,7 @@ The Vite proxy is set in `vite.config.js`:
 ```js
 proxy: {
   '/api': {
-    target: 'http://localhost:59607',  // change when backend moves
+    target: 'http://localhost:5000',  // change when backend moves
   }
 }
 ```

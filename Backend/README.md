@@ -31,7 +31,7 @@ Open a terminal at `Backend` and run:
 dotnet run
 ```
 
-By default the app listens on `http://localhost:59607` and `https://localhost:59606`. Swagger/OpenAPI is available at `http://localhost:59607/swagger`.
+By default the app listens on `http://localhost:5000` and `https://localhost:5001`. Swagger/OpenAPI is available at `http://localhost:5000/swagger`.
 
 ### API endpoints
 
@@ -51,6 +51,6 @@ Use `curl` or a browser to hit these endpoints while the server is running.
 - **Authentication**: plug in ASP.NET Identity, JWT bearer, or another scheme.
 - **Logging/Telemetry**: configure ESL or Application Insights in `Program.cs`.
 
-The frontend is configured to call `http://localhost:59607/api` by default; adjust the base URL in `../Frontend/api/index.js` if you change the backend port.
+The frontend is configured to call `http://localhost:5000/api` by default; adjust the base URL in `../Frontend/api/index.js` if you change the backend port.
 
 ---

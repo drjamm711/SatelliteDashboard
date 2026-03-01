@@ -5,7 +5,7 @@ const NAV_ITEMS = [
   { to: '/',           icon: 'apps',               label: 'Dashboard'  },
   { to: '/satellites', icon: 'satellite-transmit', label: 'Satellites' },
   { to: '/contacts',   icon: 'antenna-receive',    label: 'Contacts'   },
-  { to: '/alerts',     icon: 'caution',            label: 'Alerts'     },
+  { to: '/alerts',     icon: 'warning',            label: 'Alerts'     },
   { to: '/settings',   icon: 'settings',           label: 'Settings'   },
 ]
 
