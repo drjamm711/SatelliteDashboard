@@ -72,6 +72,29 @@ npm run preview   # preview the production build locally
 
 Serve the contents of `dist/` as static files from `wwwroot` (ASP.NET) or any static file server.
 
+## Docker
+
+A production container is built in two stages: first produce the static bundle, then serve it with nginx. A `Dockerfile` is provided at the project root.
+
+```bash
+# from repo root
+docker build -t satellite-frontend:latest -f Frontend/Dockerfile Frontend
+```
+
+Run the resulting image to expose the app on port 80:
+
+```bash
+docker run --rm -p 3000:80 satellite-frontend:latest
+```
+
+To start both services together, use the repository‑level `docker-compose.yml`:
+
+```bash
+docker compose up --build
+```
+
+The frontend container will be reachable at `http://localhost:3000` and proxies `/api` to the backend service on the compose network.
+
 ## Adding a New Page 
 1. Add a new component in `src/pages/MyPage.jsx`.
 2. Register the route inside `src/App.jsx`.

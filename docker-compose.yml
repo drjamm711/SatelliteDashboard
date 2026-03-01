@@ -1,0 +1,21 @@
+services:
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"         # map container port 80 to host 5000
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"         # serve static files on host port 3000
+    depends_on:
+      - backend
+    environment:
+      # if you want the frontend to call backend at /api (same container network)
+      - VITE_API_BASE=/api

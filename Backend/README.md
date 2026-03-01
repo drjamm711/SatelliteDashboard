@@ -53,4 +53,27 @@ Use `curl` or a browser to hit these endpoints while the server is running.
 
 The frontend is configured to call `http://localhost:5000/api` by default; adjust the base URL in `../Frontend/api/index.js` if you change the backend port.
 
+## Docker
+
+A containerized backend can be built using the included `Dockerfile`:
+
+```bash
+# from repo root
+docker build -t satellite-backend:latest -f Backend/Dockerfile Backend
+```
+
+Once built it listens on port 80 inside the image. Run with:
+
+```bash
+docker run --rm -p 5000:80 satellite-backend:latest
+```
+
+Or start both services together via `docker-compose`:
+
+```bash
+docker compose up --build
+```
+
+The compose file maps `backend` to host port 5000 and `frontend` to port 3000.
+
 ---
