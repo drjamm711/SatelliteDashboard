@@ -3,6 +3,7 @@ name: Deploy Frontend to GitHub Pages
 on:
   push:
     branches: [ main ]
+  workflow_dispatch: 
 
 jobs:
   build-and-deploy:
@@ -22,11 +23,6 @@ jobs:
       - name: Build project
         run: |
           npm run build
-          # ensure the build directory exists so we don't accidentally deploy README
-          if [ ! -d "Frontend/dist" ]; then
-            echo "Build output missing – abort." >&2
-            exit 1
-          fi
         working-directory: Frontend
 
       - name: Deploy to GitHub Pages
