@@ -16,11 +16,17 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
         working-directory: Frontend
 
       - name: Build project
-        run: npm run build
+        run: |
+          npm run build
+          # ensure the build directory exists so we don't accidentally deploy README
+          if [ ! -d "Frontend/dist" ]; then
+            echo "Build output missing – abort." >&2
+            exit 1
+          fi
         working-directory: Frontend
 
       - name: Deploy to GitHub Pages
